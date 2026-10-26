@@ -124,7 +124,7 @@ class Drama:
     def __str__(self):
         return f"{self.name} ({self.year}), rating: {self.rating}"
 
-d = DictHash()
+d = Hashtable(1009)
 
 rows = load_drama_rows()
 
