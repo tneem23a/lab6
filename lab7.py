@@ -1,4 +1,43 @@
 import csv
+import json
+import re
+from pathlib import Path
+
+
+def load_drama_rows():
+    candidates = [
+        Path("kdramaMini.txt"),
+        Path("kdrama.csv"),
+        Path("kdrama (1).htm"),
+    ]
+
+    for path in candidates:
+        if not path.exists():
+            continue
+
+        if path.suffix.lower() in {".htm", ".html"}:
+            text = path.read_text(encoding="utf-8")
+            match = re.search(
+                r'<script type="application/json" data-target="react-app\.embeddedData">(.*?)</script>',
+                text,
+                re.DOTALL,
+            )
+            if match:
+                payload = json.loads(match.group(1))
+                rows = payload.get("payload", {}).get("codeViewBlobRoute", {}).get("csv", [])
+                if rows:
+                    return rows
+            continue
+
+        with open(path, newline="", encoding="utf-8") as file:
+            rows = list(csv.reader(file))
+            if rows:
+                return rows
+
+    raise FileNotFoundError(
+        "No dataset file found. Expected kdramaMini.txt, kdrama.csv, or kdrama (1).htm"
+    )
+
 
 class DictHash:
     def __init__(self):
@@ -87,22 +126,20 @@ class Drama:
 
 d = DictHash()
 
-with open("kdramaMini.txt", encoding="utf-8") as file:
-    reader = csv.reader(file)
+rows = load_drama_rows()
 
-    next(reader)  # första rubriken
-    next(reader)  # andra rubriken
+header = rows[0]
+for row in rows[1:]:
+    if len(row) < 8:
+        continue
 
-    for row in reader:
-        name = row[0]
-        rating = row[1]
-        actor = row[2]
-        year = row[7]
+    name = row[0]
+    rating = row[1]
+    actor = row[2]
+    year = row[7]
 
-        drama = Drama(name, rating, actor, year)
-
-        # namnet används som key
-        d.store(name, drama)
+    drama = Drama(name, rating, actor, year)
+    d.store(name, drama)
 
 
 # Testa sökning
