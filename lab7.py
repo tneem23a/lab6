@@ -141,6 +141,8 @@ for row in rows[1:]:
     drama = Drama(name, rating, actor, year)
     d.store(name, drama)
 
+max_krock = max(len(bucket) for bucket in d.table)
+print("Största krocklista:", max_krock)
 
 # Testa sökning
 try:
