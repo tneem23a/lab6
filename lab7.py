@@ -66,6 +66,7 @@ for row in rows[1:]:
 max_krock = max(len(bucket) for bucket in d.table)
 print("Största krocklista:", max_krock)
 
+
 # Försök att hitta en serie med dess namn som nyckel.
 try:
     drama = d.search("Legend of the Blue Sea")

@@ -45,7 +45,7 @@ class Hashtable:
 
         # Bygg upp ett hashvärde tecken för tecken och håll det inom tabellens storlek.
         for char in key:
-            h = (h * 31 + ord(char)) % self.size
+            h = (h * 31 + ord(char)) % self.size #omvandlar bokstav till tal, 31 - ordning spelar roll, jämnare fördelning 
 
         return h
 
