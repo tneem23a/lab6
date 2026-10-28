@@ -1,9 +1,8 @@
+from ast import main
 from linkedQ import LinkedQueue
-
 
 class Syntaxfel(Exception):
     pass
-
 
 def readformel(q):
 
@@ -63,21 +62,28 @@ def readnum(q):
         )
 
 
-while True:
 
-    rad = input().strip()
+def main():
 
-    if rad == "#":
-        break
+    while True:
 
-    q = LinkedQueue()
+        rad = input().strip()
 
-    for tecken in rad:
-        q.enqueue(tecken)
+        if rad == "#":
+            break
 
-    try:
-        readformel(q)
-        print("Formeln är syntaktiskt korrekt")
+        q = LinkedQueue()
 
-    except Syntaxfel as fel:
-        print(fel)
+        for tecken in rad:
+            q.enqueue(tecken)
+
+        try:
+            readformel(q)
+            print("Formeln är syntaktiskt korrekt")
+
+        except Syntaxfel as fel:
+            print(fel)
+
+
+if __name__ == "__main__":
+    main()

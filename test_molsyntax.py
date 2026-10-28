@@ -18,6 +18,8 @@ class TestMolsyntax(unittest.TestCase):
             readLETTER(q)
         except Syntaxfel:
             self.fail()
+    #skapa kö innehåller A sedan anropa readLETTER(q) och kontrollera att det inte kastar Syntaxfel. 
+    #annars är det misslyckat 
 
     def test_liten_bokstav(self):
 
@@ -27,6 +29,7 @@ class TestMolsyntax(unittest.TestCase):
 
         with self.assertRaises(Syntaxfel):
             readLETTER(q)
+    #förvänta syntaxfel när man anropar readLETTER(q) med en kö som innehåller en liten bokstav.
 
 def test_atom_en_bokstav(self):
     q = LinkedQueue()
@@ -50,6 +53,7 @@ def test_atom_tva_bokstaver(self):
         readatom(q)
     except Syntaxfel:
         self.fail()
+#test, skapa en kö som innehåller två bokstäver, anropa readatom(q) och kontrollera att det inte kastar Syntaxfel. Annars är det misslyckat.
 
 def test_nummer_godkant(self):
 
