@@ -37,7 +37,7 @@ def readMol(q):
     readGroup(q)
 
     while not q.isEmpty() and q.peek() != ")":
-        readGroup(q)
+        readMol(q)
 
 
 def readGroup(q):
