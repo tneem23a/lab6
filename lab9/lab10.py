@@ -1,11 +1,10 @@
 from molgrafik import Ruta, Molgrafik
 from hashtest import skapaAtomlista, lagraHashtabell
 
-
-
 #atomtabell skapas en gång
 atomlista = skapaAtomlista()
 atomtabell = lagraHashtabell(atomlista)
+
 
 class Node:
     def __init__(self, value):
@@ -206,10 +205,12 @@ def main():
 
             print("Molekylvikt:", weight(mol))
 
-            mg = Molgrafik()
-            mg.show(mol)
-            mg.root.mainloop()
-
+            try:
+                mg = Molgrafik()
+                mg.show(mol)
+                mg.root.mainloop()
+            except Exception:
+                print("Grafik kan inte visas i denna miljö.")
 
 
         except Syntaxfel as e:

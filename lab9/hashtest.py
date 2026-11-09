@@ -176,8 +176,8 @@ def skapaAtomlista():
     lista = atomdata.split(";")
     for namn_vikt in lista:
         namn, vikt = namn_vikt.split()
-    atom = Atom(namn, float(vikt))
-    atomlista.append(atom)
+        atom = Atom(namn, float(vikt))
+        atomlista.append(atom)
     return atomlista
 
 def lagraHashtabell(atomlista):

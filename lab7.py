@@ -1,4 +1,4 @@
-from hashtable import Hashtable
+from lab9.hashtable import Hashtable
 
 import json
 import re
